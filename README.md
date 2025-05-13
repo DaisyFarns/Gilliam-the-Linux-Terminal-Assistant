@@ -30,10 +30,4 @@ Before running the System-Agent, ensure you have the following installed:
 
 ## Installation Steps:
 
-1. **Download the Installation Script**:
-   Download and run the provided installation script to set up the System-Agent.
-
-   ```bash
-   curl -O https://example.com/install_agent.sh
-   chmod +x install_agent.sh
-   ./install_agent.sh
+Paste the install script into your terminal.
