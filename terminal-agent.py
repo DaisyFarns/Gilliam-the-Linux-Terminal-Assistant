@@ -36,6 +36,14 @@ def execute_command(cmd):
     except Exception as e:
         print(f"🔥 Command failed: {e}")
 
+def load_api_key():
+    # TODO: Write this function
+    raise NotImplementedError()
+
+def ask_gpt(cmd, api_key):
+    # TODO: Write this function
+    raise NotImplementedError()
+
 def main():
     print(BANNER)
     print("Type a command or ask a question. Type 'exit' to quit.")
@@ -57,10 +65,18 @@ def main():
                 continue
             elif is_question(cmd):
                 if api_key:
-                    print("🧠 GPT says:\n" + ask_gpt(cmd, api_key))
+                    answer = ask_gpt(cmd, api_key)
+                    print("🧠 GPT says:\n" + answer)
+
+                    # TODO: Implement system to extract commands
+                    # from ChatGPT answer
                 else:
                     parts = cmd.strip().split()
-                    target = parts[-1]
+
+                    # It's difficult to extract the name of the program,
+                    # but the first element is I think the most likely
+                    target = parts[0]
+                    
                     get_manual_info(target)
             else:
                 execute_command(cmd)
