@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Disable history expansion in Bash
+set +H
+
 AGENT_NAME="terminal-agent"
 INSTALL_DIR="$HOME/.config/$AGENT_NAME"
 SCRIPT_PATH="$INSTALL_DIR/$AGENT_NAME.py"
@@ -56,6 +59,12 @@ def main():
     print("Type a command or ask a question. Type 'exit' to quit.")
     print(HELP_TEXT)
 
+    api_key = load_api_key()
+    if api_key:
+        print("🔑 OpenAI API key loaded: GPT support is ENABLED.")
+    else:
+        print("⚠️ No OpenAI API key found. GPT support is DISABLED.")
+
     while True:
         try:
             cmd = input("agent> ").strip()
@@ -65,9 +74,12 @@ def main():
             elif not cmd:
                 continue
             elif is_question(cmd):
-                parts = cmd.strip().split()
-                target = parts[-1]
-                get_manual_info(target)
+                if api_key:
+                    print("🧠 GPT says:\n" + ask_gpt(cmd, api_key))
+                else:
+                    parts = cmd.strip().split()
+                    target = parts[-1]
+                    get_manual_info(target)
             else:
                 execute_command(cmd)
         except KeyboardInterrupt:
