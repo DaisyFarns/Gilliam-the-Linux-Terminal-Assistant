@@ -2,7 +2,7 @@
 # It's like co-pilot for Linux, but doesn't suck, and instead of a pilot sitting beside you, they will instead be right inside your ass.
 # Gilliam-the-Linux-Terminal-Assistant
 # Gilliam is your trusted friend, not a root kit, even though it does kind of look like one. Don't however be fooled, it's like giving your machine over to ChatGPT, which will seamlessly intergrate with your terminal.
-# System-Agent v1.0
+# System-Agent v0.1
 
 
 ## Overview
