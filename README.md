@@ -117,6 +117,59 @@ Gilliam, show me how to make a bash function that kills Chrome.
 
 ---
 
+## 📦 Dependencies & Setup
+
+### Required Python Packages
+
+The `terminal-agent.py` script depends on the following Python packages:
+
+```
+openai>=1.0.0
+rich>=13.0.0
+requests>=2.31.0
+python-dotenv>=1.0.0
+```
+
+---
+
+### Installing Dependencies
+
+Place a file named `requirements.txt` in the root of the repo with the above packages listed. Then run:
+
+```bash
+pip install -r requirements.txt
+```
+
+This will install all necessary libraries to run Gilliam smoothly.
+
+---
+
+### Optional: Environment Variables
+
+For API keys and sensitive configs, create a `.env` file in the repo root with:
+
+```
+OPENAI_API_KEY=your_openai_api_key_here
+```
+
+Make sure your `.gitignore` excludes `.env` to keep secrets safe.
+
+The script uses `python-dotenv` to load these variables automatically.
+
+---
+
+### Summary
+
+1. Create `requirements.txt` with the dependency list.  
+2. Run `pip install -r requirements.txt`.  
+3. (Optional) Add `.env` with your API keys.  
+4. Run `python3 terminal-agent.py` and watch the magic.
+
+---
+
+Need help verifying or automating the install? Just holler.
+
+
 ## 🛠️ Roadmap / To-Do
 
 - TUI interface (curses or Rich)
