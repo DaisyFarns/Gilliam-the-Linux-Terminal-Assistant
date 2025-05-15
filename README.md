@@ -195,3 +195,88 @@ Pull requests welcome. Fork the repo, do your chaos, and send it up.
 
 MIT. Use it, modify it, turn it into a war machine. Just don't blame us when it achieves sentience.
 
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+UPDATE WEB SOCKET CLI RELAY
+
+## 🌐 WebSocket CLI Relay
+
+Gilliam now supports a remote WebSocket-based command execution relay. Connect from any WebSocket client, send a shell command, and get the result back in real-time.
+
+### 📁 File: `ws_cli_relay.py`
+
+This script starts a WebSocket server on port `8765` that listens for commands, executes them locally, and sends back the output.
+
+---
+
+### 📦 Dependencies
+
+Add these to your `requirements.txt`:
+
+```
+websockets>=11.0.0
+```
+
+Full `requirements.txt` snippet for this feature:
+
+```
+websockets>=11.0.0
+```
+
+Install with:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+### 🚀 How to Run
+
+Start the WebSocket server:
+
+```bash
+python3 ws_cli_relay.py
+```
+
+Server will listen on:
+
+```
+ws://0.0.0.0:8765
+```
+
+---
+
+### 🧪 Example: Python WebSocket Client
+
+Test the relay by running this:
+
+```python
+# ws_test_client.py
+
+import asyncio
+import websockets
+
+async def test():
+    uri = "ws://localhost:8765"
+    async with websockets.connect(uri) as websocket:
+        print(await websocket.recv())
+
+        await websocket.send("uptime")
+        print(await websocket.recv())
+
+asyncio.run(test())
+```
+
+---
+
+### ⚠️ Warning
+
+This server **does not implement authentication** and **executes raw shell input**.
+Use only in trusted environments or behind secure firewalls.
+
+---
+
+
