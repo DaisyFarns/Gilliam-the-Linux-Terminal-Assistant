@@ -187,7 +187,7 @@ Pull requests welcome. Fork the repo, do your chaos, and send it up.
 
 - Original Author: [Hakkadex](https://github.com/Hakkadex)
 - Python Fork & Contributor: [DaisyFarns](https://github.com/DaisyFarns)
-- Terminal Integration & Madness: Metal Knight
+- Terminal Integration & Madness: Metal Knight & 2hands - The Red Hat
 
 ---
 
