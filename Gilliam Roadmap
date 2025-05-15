@@ -1,0 +1,155 @@
+# 🧠 Gilliam: The Terminal AI Assistant
+
+Gilliam is a ChatGPT-powered, terminal-native assistant designed for hackers, power users, and sci-fi degenerates who want a fully interactive, scriptable, internet-aware AI living in their Linux box.
+
+Inspired by **Rick's garage OS**, Gilliam isn’t just a chatbot—it's a modular, TUI-enhanced, WebSocket-enabled assistant with plans for full voice control, plugin support, and remote access.
+
+---
+
+## ⚙️ Features
+
+- ✅ OpenAI/GPT-4 integration
+- ✅ Textual Terminal UI (TUI)
+- ✅ Shell command execution
+- ✅ WebSocket CLI relay for remote command streaming
+- ⏳ Plugin support (WIP)
+- ⏳ Internet-aware search/scrape mode
+- ⏳ Voice I/O (Jarvis mode)
+- ⏳ Remote access via web dashboard
+- ⏳ Multi-agent persona system
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Project
+
+```bash
+git clone https://github.com/Hakkadex/Gilliam-the-Linux-Terminal-Assistant.git
+cd Gilliam-the-Linux-Terminal-Assistant
+```
+
+---
+
+### 2. Install Requirements
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+#### Requirements Include:
+
+```
+openai>=1.0.0
+requests>=2.31.0
+rich>=13.0.0
+python-dotenv>=1.0.0
+textual>=0.37.0
+websockets>=11.0.0
+```
+
+---
+
+### 3. Set Your OpenAI Key
+
+Create a `.env` file in the root directory:
+
+```
+OPENAI_API_KEY=your-api-key-here
+```
+
+---
+
+## 🖥️ Terminal UI Mode
+
+Launch the interactive terminal interface:
+
+```bash
+python3 gilliam_tui.py
+```
+
+You can enter natural language or direct shell commands.
+Customize the TUI look in `tui.css`.
+
+---
+
+## 🌐 WebSocket CLI Relay
+
+Run the WebSocket server:
+
+```bash
+python3 ws/ws_cli_relay.py
+```
+
+Connect to `ws://localhost:8765` with any WebSocket client to send shell commands remotely.
+
+Example test client:
+
+```python
+# ws_test_client.py
+import asyncio, websockets
+
+async def test():
+    uri = "ws://localhost:8765"
+    async with websockets.connect(uri) as ws:
+        print(await ws.recv())
+        await ws.send("uptime")
+        print(await ws.recv())
+
+asyncio.run(test())
+```
+
+---
+
+## 🔭 Roadmap
+
+### 🧩 Modular Plugin System
+- Docker container control
+- Weather APIs, Nmap scans, hardware integration
+
+### 🌍 Internet-Aware Mode
+- Live web scraping
+- Search results processing
+- CVE lookups, news, etc.
+
+### 🎙️ Jarvis Mode
+- Voice-to-text + text-to-speech
+- Wake word + command flow
+
+### 🌐 Remote Access Panel
+- Web dashboard (FastAPI)
+- Mobile controls via WebSockets
+
+### 🧠 Personas & Agents
+- Switch between pre-tuned agents:
+  - Hacker
+  - Scientist
+  - Dungeon Master
+  - Revy mode (for max sarcasm)
+
+### 📟 Terminal Overlay AI
+- Always-on AI shell monitor
+- Shows real-time alerts/suggestions in terminal
+
+---
+
+## 🛑 Warning
+
+Some features (e.g., shell execution via WebSocket) are **inherently dangerous**. Use on secure, isolated systems or implement strict authentication and sandboxing.
+
+---
+
+## 🤝 Contributors
+
+- [Hakkadex](https://github.com/Hakkadex) - Creator, Systems Architect
+- [DaisyFarns](https://github.com/DaisyFarns) - Python port, TUI engineer
+
+---
+
+## 🧪 Want to Help?
+
+PRs welcome! We’re building a cyberpunk OS from the CLI up. Check the [issues](https://github.com/Hakkadex/Gilliam-the-Linux-Terminal-Assistant/issues) and let's get weird.
+
+---
