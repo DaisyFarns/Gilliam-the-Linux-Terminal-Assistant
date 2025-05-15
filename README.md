@@ -167,9 +167,6 @@ The script uses `python-dotenv` to load these variables automatically.
 
 ---
 
-Need help verifying or automating the install? Just holler.
-
-
 ## 🛠️ Roadmap / To-Do
 
 - TUI interface (curses or Rich)
