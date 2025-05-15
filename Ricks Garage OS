@@ -1,0 +1,134 @@
+# 🛠️ Rick's Garage OS (RG) — Debian & Arch Setup Scripts + Branch Strategy
+
+Welcome to **Rick’s Garage OS (RG)** — a lean, hacker-friendly Linux distro built around the Gilliam AI assistant and bleeding-edge terminal tooling. This guide and scripts get you up and running on Debian-based systems and Arch Linux, plus how to manage branches for each and customize the OS image.
+
+---
+
+## 🚀 What is Rick’s Garage OS?
+
+- Debian base with AUR Arch branch for power users  
+- Preinstalled Gilliam AI Terminal Assistant + TUI + WebSocket relay  
+- Custom tooling, plugins, voice modules ready out-of-the-box  
+- Hardened for offensive/defensive research, automation, and sci-fi level hacking  
+
+---
+
+## 📁 File: `rg_install.sh` (Debian-based)
+
+```bash
+#!/bin/bash
+# Rick's Garage OS Installer Script (Debian-based)
+
+set -e
+
+echo "[*] Updating system..."
+sudo apt update && sudo apt upgrade -y
+
+echo "[*] Installing dependencies..."
+sudo apt install -y python3 python3-pip python3-venv git curl build-essential \
+    libffi-dev libssl-dev libnacl-dev
+
+echo "[*] Cloning Gilliam repo..."
+git clone https://github.com/Hakkadex/Gilliam-the-Linux-Terminal-Assistant.git ~/Gilliam
+cd ~/Gilliam
+
+echo "[*] Setting up Python virtual environment..."
+python3 -m venv venv
+source venv/bin/activate
+
+echo "[*] Installing Python dependencies..."
+pip install --upgrade pip
+pip install -r requirements.txt
+
+echo "[*] Setup complete. Copy your .env file with your OPENAI_API_KEY."
+echo "Run 'source venv/bin/activate' then 'python3 gilliam_tui.py' to start the assistant."
+
+```
+
+---
+
+## 📁 File: `rg_install_arch.sh` (Arch Linux AUR branch)
+
+```bash
+#!/bin/bash
+# Rick's Garage OS Installer Script (Arch Linux)
+
+set -e
+
+echo "[*] Updating system..."
+sudo pacman -Syu --noconfirm
+
+echo "[*] Installing dependencies..."
+sudo pacman -S --noconfirm python python-pip git base-devel
+
+echo "[*] Installing Textual and Websockets from PyPI..."
+pip install --upgrade pip
+pip install textual websockets openai requests rich python-dotenv
+
+echo "[*] Cloning Gilliam repo (Arch branch)..."
+git clone -b arch https://github.com/Hakkadex/Gilliam-the-Linux-Terminal-Assistant.git ~/Gilliam
+cd ~/Gilliam
+
+echo "[*] Setup complete. Copy your .env file with your OPENAI_API_KEY."
+echo "Run 'python3 gilliam_tui.py' to start the assistant."
+```
+
+---
+
+## 🌿 Git Branch Strategy
+
+- `main` — Debian-based stable releases  
+- `arch` — Arch Linux branch, with Arch-specific setup, dependencies, and PKGBUILDs  
+- `dev` — Experimental features and bleeding edge code  
+
+Use branches to separate packaging scripts, dependency lists, and OS-specific tweaks.
+
+---
+
+## ⚙️ Creating Your Own Rick’s Garage OS Distro
+
+1. **Base ISO**: Start from minimal Debian netinstall or Arch base ISO.  
+2. **Auto-install scripts**: Include `rg_install.sh` (Debian) or `rg_install_arch.sh` (Arch) for rapid setup.  
+3. **Custom Configs**: Add Gilliam configs, voice modules, and plugin sets baked into the image.  
+4. **Branding**: Replace boot splash, terminal prompts, and default MOTD with Rick’s Garage theme.  
+5. **Extras**: Bundle offensive security tools (Nmap, Metasploit), dev tools, and system monitoring overlays.  
+6. **Build Tools**: Use `live-build` (Debian) or `archiso` (Arch) for creating installable ISOs.
+
+---
+
+## 📦 Example ISO Build Workflow (Debian)
+
+```bash
+sudo apt install live-build
+git clone https://github.com/yourname/ricks-garage-config.git
+cd ricks-garage-config
+sudo lb build
+```
+
+Replace config files to automate installing Gilliam and dependencies on first boot.
+
+---
+
+## 🤝 Contribution & Collaboration
+
+- Push Arch-specific packaging and PKGBUILDs to the `arch` branch  
+- Submit bugfixes and new features to `dev`, then merge to `main` or `arch`  
+- Maintain install scripts synced with each branch  
+- Add documentation for creating custom images and overlays  
+
+---
+
+## 🧪 Getting Started Now
+
+- Pick your platform branch (`main` for Debian, `arch` for Arch)  
+- Run the appropriate install script on a fresh VM or bare metal  
+- Configure `.env` with your OpenAI API key  
+- Launch Gilliam and start hacking the future  
+
+---
+
+**Rick’s Garage OS: More than an assistant — your sci-fi Linux playground.**
+
+---
+
+*This file created by Metal Knight for Hakkadex’s Rick’s Garage project.*
