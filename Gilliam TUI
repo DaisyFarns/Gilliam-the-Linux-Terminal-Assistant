@@ -1,0 +1,89 @@
+## 🎮 Terminal User Interface (TUI) Mode
+
+Gilliam now includes an optional Textual-powered terminal UI for enhanced interaction.
+
+---
+
+### 📁 File: `gilliam_tui.py`
+
+```python
+# gilliam_tui.py
+
+from textual.app import App, ComposeResult
+from textual.widgets import Header, Footer, Input, Static
+from textual.containers import Vertical
+from rich.markdown import Markdown
+import subprocess
+
+class GilliamOutput(Static):
+    def update_output(self, content: str):
+        self.update(Markdown(content))
+
+class GilliamApp(App):
+    """Gilliam Terminal Assistant - TUI Mode"""
+    CSS_PATH = "tui.css"
+
+    def compose(self) -> ComposeResult:
+        yield Header()
+        yield Vertical(
+            self.output := GilliamOutput("🧠 Gilliam Online.\nAsk your question or give a command."),
+            self.input := Input(placeholder="> What do you need, soldier?"),
+        )
+        yield Footer()
+
+    async def on_input_submitted(self, message: Input.Submitted) -> None:
+        query = message.value.strip()
+        if query:
+            # Replace this block with actual Gilliam logic
+            try:
+                result = subprocess.getoutput(query)
+                self.output.update_output(f"```bash\n{result}\n```")
+            except Exception as e:
+                self.output.update_output(f"**Error:** {str(e)}")
+            self.input.value = ""
+
+if __name__ == "__main__":
+    GilliamApp().run()
+```
+
+---
+
+### 📁 File: `tui.css` (optional, but improves layout and styling)
+
+```css
+/* tui.css */
+Screen {
+    background: black;
+    color: white;
+}
+
+GilliamOutput {
+    padding: 1;
+    height: 90%;
+    overflow: auto;
+    border: round green;
+}
+
+Input {
+    border: round cyan;
+    padding: 1;
+}
+```
+
+---
+
+### ✅ Add to `requirements.txt`
+
+Ensure `textual` is listed in your dependencies:
+
+```
+textual>=0.37.0
+```
+
+---
+
+### 🧪 Run the TUI
+
+```bash
+python3 gilliam_tui.py
+```
